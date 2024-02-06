@@ -2,7 +2,7 @@
 
 - Udělej fork tohoto repozitáře (https://github.com/hptroniccz/hpt-test-grabber).
 - Následující dva úkoly proveď postupně jako jednotlivé commity.
-- Použij kód kompatibilní s PHP 8.1.
+- Použij kód kompatibilní s PHP 8.3.
 
 1. Naprogramuj aplikaci pro zjištění ceny produktu na CZC.cz. Vstup může být jeden nebo více kódů výrobce zboží. 
     1. Vstupní bod aplikace je soubor [run.php](run.php) a spuštění metody run() instance třídy [Dispatcher](src/Dispatcher.php).
