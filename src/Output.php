@@ -15,7 +15,7 @@ class Output implements IOutput
 
     public function addProduct(Product $product): void
     {
-        $this->products[$product->getProductCode()] = ['price' => $product->getPrice(), 'name' => $product->getName()];
+        $this->products[$product->getProductCode()] = ['price' => $product->getPrice(), 'name' => $product->getName(), 'rating' => $product->getRating()];
     }
 
     public function getJson(): string

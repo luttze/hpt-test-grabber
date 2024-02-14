@@ -7,6 +7,7 @@ namespace HPT;
 
 use DOMDocument;
 use DOMElement;
+use DOMNode;
 use DOMXPath;
 use HPT\entity\Product;
 
@@ -71,13 +72,35 @@ private function parseProductDetails(string $productCode, string $html): ?Produc
                 $name = $gaImpressionData['name'] ?? null;
                 $price = $gaImpressionData['price'] ?? null;
 
-                return new Product($productCode, $name, $price);
+                $rating = $this->extractRating($xpath, $productNode);
+
+                return new Product($productCode, $name, $price, $rating);
             }
         }
     }
 
     return null;
 }
+
+    private function extractRating(DOMXPath $xpath, DOMNode $contextNode): ?int
+    {
+        $ratingNodes = $xpath->query(".//*[contains(@class, 'rating')]", $contextNode);
+        if (!$ratingNodes) {
+            return null;
+        }
+        foreach ($ratingNodes as $ratingNode) {
+            if (!$ratingNode instanceof DOMElement) {
+                return null;
+            }
+            $styleAttribute = $ratingNode->getAttribute('style');
+            if ($styleAttribute && preg_match('/--rating-value:\s*(\d+)/', $styleAttribute, $matches)) {
+                return intval($matches[1]);
+            }
+        }
+
+        return null;
+    }
+
 private function ensureUtf8Encoding(string $html): string
 {
     if (stripos($html, '<meta charset="UTF-8">') === false) {
