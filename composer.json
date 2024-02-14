@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "HPT\\": "src/"
+        }
+    },
+    "require": {
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-dom": "*",
+        "ext-curl": "*"
+    }
+}
